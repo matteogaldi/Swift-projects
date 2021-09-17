@@ -15,6 +15,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Storm Viewer"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
         // Do any additional setup after loading the view.
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
@@ -46,6 +47,11 @@ class ViewController: UITableViewController {
             vc._title = "\(indexPath.row + 1) of \(pictures.count)"
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    @objc func shareTapped() {
+        let vc = UIActivityViewController(activityItems: [Bundle.main.resourcePath!], applicationActivities: [])
+        present(vc, animated: true)
     }
 
 }
